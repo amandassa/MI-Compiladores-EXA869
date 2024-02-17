@@ -1,0 +1,127 @@
+﻿const {
+    int sete = 4.1, oito = "asd";
+    real um = true, dois = false;
+    string variavel=4, variavel2="4";
+    boolean teste = 13;
+    boolean teste_2 = false;
+}
+variables {
+    int a123, b1_2, c_________asda;
+    boolean aa, a_2;
+    int s[a][123];
+    real um[90][123][123][123][123];
+
+}
+class a extends a{
+    variables{}
+    objects{}
+    methods{
+        void metodo2(int a,real a, string a, boolean a){
+            variables{}
+            objects{}
+            a=[1,2,3,4,[[1,2,3],1,2,3,4]];
+            if (a ==a)
+            then{
+                a = a[1][1];
+            }else{
+                if (a!= b)
+                then{
+                    b = "asdasd";
+                }else{
+                    a++;
+                    a=a++;
+                    a[1][1][1][1][1]++;
+                    b= a-1-a-1-a-a-a-a-1;
+                    c= a<1;
+                    d = a<b;
+                    d = !(d<10);
+                    c = c == d;
+                }
+            }
+            print("for tem 1 ter variavel recebendo valor ; operacao relacional; variavel recebendo valor ou esprecao");
+            for (c=0;c<23; a=a){
+                   c= c+ a;
+                   if(a<b)
+                   then{
+                    a=3;
+                   }else{
+                    b=b-1;
+                   }
+            
+            }
+            return zzz;
+        }
+    }
+    constructor () {
+        variables{}
+        objects{}
+    }
+}
+class a extends a{
+    variables{
+    int a,c,b,a;
+    real asd,asd,as,da,da;
+    }
+    
+    objects {
+    asd adsad, adsad , asda ;
+    a a,a,a,a,a,a,a,a;
+    }
+    
+    methods{
+    
+    int a(){
+        variables{}
+        objects{}
+        return;}
+    real a(int a, real a, string a, boolean a, asda a){
+        variables{}
+        objects{}
+        return;}
+    boolen a(asda asd,asd da){
+        variables{}
+        objects{}
+        return;}
+    string a(asad as){
+        variables{}
+        objects{}
+        return;}
+    askdakls a(int asd){
+        variables{}
+        objects{}
+        return;}
+    asd_____ a(){
+        variables{}
+        objects{}
+        return;}
+    a123__1231__asd a(){
+        variables{}
+        objects{}
+        return;}
+    
+    }
+    
+    constructor () {
+        variables{}
+        objects{}
+        a = a->asdojhajio(aknjsdklan,12,"asdasd",asdas);
+        a.as.s.s.a.q.a->adsad();
+    }
+}
+
+class main{
+    variables {
+    }
+    objects {
+    }
+    methods{ 
+        void main(){
+            variables{}
+            objects{}
+            this->algo(asipjdpa,als,d,a,dla,dla,123,1.31,123.312,"ajsdakpdm123123!@#");
+            a.a->constructor();
+            this.a.a.a.a->contructor();
+            return;
+        }
+    }
+}

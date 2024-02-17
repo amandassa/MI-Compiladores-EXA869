@@ -1,0 +1,60 @@
+const {
+    real pi = 3.1415;
+}
+variables {
+}
+class Person {
+    variables{
+        string name;
+        int age;
+        real height;
+    }
+    objects{
+    }
+    methods{
+        void changeAge(real age) {
+            variables {
+                int age; // Erro de identificadores duplicados.
+                int oui;
+            }
+            objects {}
+
+            this.age = age; // Erro de tipos diferentes.
+
+            return;
+        }
+
+        int changeAge1() { // Erro de método duplicado
+            variables {
+                int age; // Erro de identificadores duplicados.
+            }
+            objects {}
+
+            this.age = age; // Ero de tipos diferentes.
+
+            return this.age;
+        }
+    }
+    constructor (string name, int age) {
+        variables{}
+        objects{}
+        
+        this.name = name;
+        this.age = age;
+    }
+}
+class main{
+    variables {
+    }
+    objects {
+    }
+    methods{ 
+        void main(){
+            variables {}
+            objects {}
+            
+            return;
+        }
+    }
+}
+

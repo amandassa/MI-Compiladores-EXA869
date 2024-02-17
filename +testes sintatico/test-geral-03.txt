@@ -1,0 +1,74 @@
+﻿const {
+    real PI = 3.1415;
+    string name_system = "Problema 2 - Compiladores";
+}
+
+variables {
+    boolean system_on;
+}
+
+class main{
+
+    variables {
+        real valores[30];
+        boolean pagamento;
+        string success_message;
+    }
+    
+    objects {
+        Pessoa pessoas[100];
+    }
+    
+    methods{         
+        void main(){
+        
+            variables {
+                int i;
+                string name_product;
+                int size;
+                boolean is_circle;
+            }
+            
+            objects {
+                Produto produtos[500];
+                Circle circle;
+            }
+            i = 0;
+            size = 500;
+            
+            for(i=0;i<size;i++) {
+                print("Nome:");
+                read(produtos[i].name_product);
+                print("Valor:");
+                read(produtos[i].value_product);
+                print("Produto adicionado com sucesso!");
+            }
+            
+            if(is_circle) then {
+                for(i=0;i<size;i++) {
+                    produtos[i].value_product = circle->getCircunferencia(produtos[i]);
+                }
+            }
+            else {
+                for(i=0;i<size;i++) {
+                    produtos[i].value_product =  1.1 * produtos[i].value_product;
+                }
+            }
+            
+            system_on = true;
+            
+            return;
+        } 
+        
+        real getCircunferencia(real item) {
+            variables {}
+            objects{}
+            
+            item = item * PI;
+            
+            return item;
+        }
+    }
+}
+
+

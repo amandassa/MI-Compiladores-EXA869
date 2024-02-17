@@ -1,0 +1,215 @@
+﻿const{
+    real PI = 3.14, E = 2.71;
+    real RAIZ_2 = 1.41; 
+    int UM = 1, ZERO = 0;
+    int DOIS = 2;
+    string HELLO = "hello", WORLD = "world!" ;
+    string HELLO_WORLD = "hello world!";
+    boolean IS_TRUE = true, IS_FALSE = false;
+}
+
+variables{
+    int zero, um;
+    real pi_aprox, e_aprox;
+    string hello_hello;
+    boolean estado; 
+    string nomes[2]; 
+}
+class Math {
+    variables{
+        real pi, e, raiz_2;
+    }
+    objects{
+    }
+    methods{
+        int soma_gaus(int n){
+            variables{
+    int soma, i;
+}
+        objects{}
+soma = 0;
+for(i = 0; i <= n; i++){
+    soma = soma + i;
+} 
+return soma;
+}
+int fibonacci(int n) {
+    variables{
+        int a, b;
+        int return1, return2;
+}
+        objects{}
+if (n <= 0) then {
+return1 = 0;
+}if (n == 1) then {
+return2 = 1;
+} else {
+    a = n -1;
+    b = n - 2;
+    return1 = this->fibonacci(a);
+    return2 = this->fibonacci(b);
+}
+result = return1 + return2;
+return result;
+}
+int calcularFatorial(int n) {
+            variables{
+                int fatorial; 
+                int i; 
+            }
+        objects{}
+            fatorial = 1;
+    
+            for (i = 1; i <= n; i++) {
+                    fatorial = fatorial * i;
+             }
+    
+                return fatorial;
+}
+real media(real n, int tam){
+        variables{
+            int i;
+            real media, contador;
+        }
+        objects{}
+        for(i=0; i<tam; i++){
+            contador = contador + n[i]; 
+        }
+        media = contador/tam;
+        return media;
+    }
+}
+    constructor(){
+        variables{}
+    objects{}
+        this.pi = PI;
+        this.e = E;
+        this.raiz_2 = RAIZ_2;
+}
+}
+class Pessoa {
+variables{
+    string nome;
+    int idade;
+    real peso;
+    boolean genero;
+}
+objects{}
+methods{
+    boolean is_adulto(){
+        variables{}
+        objects{}
+        if (this.idade >= 18) then {
+            print("Sim");
+        }
+        else{
+            print("Nao");
+        }
+        return false;
+    }
+    string genero(){
+        variables{
+            string mulher;
+            string homem;
+}
+        objects{}
+mulher = "mulher";
+homem = "homem";
+if (this.genero) then {
+    print( "eh mulher");
+} else {
+    print("eh homem");
+}
+
+    return true;
+}
+}
+constructor(string nome, int idade, real peso, boolean genero){
+    variables{}
+    objects{}
+    this.nome = nome;
+    this.idade = idade;
+    this.peso = peso;
+    this.genero = genero;
+}
+ 
+}
+class Funcionario extends Pessoa {
+    variables{
+    int num_registro;
+    string setor;
+    boolean is_gerente;
+    int folga;
+}
+objects{
+    Pessoa dependente;
+}
+methods{
+    void is_gerente(){
+        variables{}
+        objects{}
+    if(is_gerente) then {
+        print("Gerente");
+} else {
+    print("Nao eh gerente");
+}
+return;
+}
+void folga(){
+    variables{}
+        objects{}
+    print("informe quantos dias de folga serao adicionados");
+    read(this.folga);
+    return;
+}
+}
+constructor(string nome, int idade, real peso, boolean genero, int num_registro,string setor, boolean is_gerente, string nome_dep,int idade_dep, real peso_dep, boolean genero_dep){
+    variables{}
+    objects{}
+    this.nome = nome;
+    this.idade = idade;
+    this.peso = peso;
+    this.genero = genero;
+    this.num_registro = num_registro;
+    this.setor = setor;
+    this.is_gerente = is_gerente;
+this.dependente = Pessoa->constructor(nome_dep, idade_dep, peso_dep, genero_dep);
+}
+}
+class main {
+    variables{
+        int i; 
+}
+objects{
+    Funcionario funcionarios[3];
+}
+methods{
+    void main(){
+        variables{}
+        objects{
+            Funcionario func1; 
+            Funcionario func2; 
+            Funcionario func3; 
+}
+func1.num_registro = 1;
+func2.num_registro = 2; 
+func3.num_registro = 3; 
+func1.setor = "setor1";
+func2.setor = "setor2";
+func3.setor = "setor3";
+func1.is_gerente = false; 
+func2.is_gerente = true; 
+func3.is_gerente = true; 
+this.funcionarios = [func1, func2, func3]; 
+for (i = 0; i<= 3; i++){
+    print("Dados do funcionario");
+    this.funcionarios[i]->is_gerente(); 
+    this.funcionarios[i]->folga(); 
+}
+print(this.funcionarios[1].dependente.nome);
+        return;
+}
+}
+}
+
+

@@ -1,0 +1,410 @@
+﻿"Start Symbol" = <PROGRAM>
+
+
+! ------ Terminals ------- ! Atualizado em 16/09/2023 às 22:03
+Decimal = {Number}+('.' {Number}+)?
+
+
+IDE = {Letter} ({Letter} | {Number} | '_')*
+    
+{String Chars} = {Printable} - {NBSP} - ["]
+                
+StringLiteral = '"' {String Chars}* '"'
+                
+Bool = 'true' | 'false'
+                
+ART = '+' | '-' | '*' | '/'
+
+
+ART_DOUBLE = '++' | '--'
+            
+REL =  '<' | '<=' | '>' | '>=' | '!=' | '=='
+    
+LOG = '&&' | '||'
+    
+! ------ Rules------------   
+! Atualizado em 20/09/2023 às 20:16
+<DEC_OBJECT_ATRIBUTE_ACCESS> ::= IDE <DIMENSIONS> <END_OBJECT_ATTRIBUTE_ACCESS>
+
+
+! Atualizado em 09/09/2023 às 16:13
+<NRO> ::= Decimal
+    
+! Atualizado em 09/09/2023 às 16:13     
+<CAC> ::= StringLiteral
+        
+! Atualizado em 14/09/2023 às 20:52
+<TYPE> ::= 'int' 
+        | 'real' 
+        | 'boolean' 
+        | 'string'
+        
+! Atualizado em 14/09/2023 às 20:52
+<DIMENSIONS> ::= '[' <SIZE_DIMENSION> ']' <DIMENSIONS>
+                |
+            
+! Atualizado em 14/09/2023 às 20:52      
+<SIZE_DIMENSION> ::= IDE 
+                    | <NRO>
+        
+! Atualizado em 16/09/2023 às 21:50
+<PARAMETERS> ::= <VALUE> <MULT_PARAMETERS> 
+                |
+
+
+! Atualizado em 16/09/2023 às 21:50                      
+<MULT_PARAMETERS> ::= ',' <VALUE> <MULT_PARAMETERS>
+                    |
+                    
+<OBJECT_METHOD_OR_OBJECT_ACCESS_OR_PART> ::= <DEC_OBJECT_ATRIBUTE_ACCESS> <OPTIONAL_OBJECT_METHOD_ACCESS>
+                    
+! -----------------------------------------------------
+! Bloco declaração parâmetros construtor - Atualizado em 18/09/2023 às 19:15
+<DEC_PARAMETERS_CONSTRUCTOR> ::= <MULT_PARAM_CONSTRUCTOR>  <MULT_DEC_PARAMETERS_CONSTRUCTOR> 
+                                | 
+                        
+<VARIABLE_PARAM> ::= <TYPE> IDE
+                    
+<OBJECT_PARAM> ::= IDE IDE 
+            
+<MULT_DEC_PARAMETERS_CONSTRUCTOR> ::= ',' <MULT_PARAM_CONSTRUCTOR> <MULT_DEC_PARAMETERS_CONSTRUCTOR>
+                                    | 
+                        
+<MULT_PARAM_CONSTRUCTOR> ::= <VARIABLE_PARAM>
+                            | <OBJECT_PARAM>
+                
+!------------------------------------------------------
+! Bloco de variáveis - Atualizado em 14/09/2023 às 20:38
+<VARIABLES_BLOCK> ::= 'variables' '{' <VARIABLES>
+                    
+<VARIABLES> ::= <VARIABLE> <VARIABLES> 
+                | '}'
+                
+<VARIABLE> ::= <TYPE> <DEC_VAR> <MULTIPLE_VARIABLES_LINE>
+            
+<MULTIPLE_VARIABLES_LINE> ::=  ';' 
+                            | ',' <DEC_VAR> <MULTIPLE_VARIABLES_LINE>
+
+! Atualizado em 14/09/2023 às 20:59               
+<DEC_VAR> ::= IDE <DIMENSIONS>
+
+! -----------------------------------------------------
+! Bloco de objetos - Atualizado em 14/09/2023 às 20:59
+<OBJECTS_BLOCK> ::= 'objects' '{' <OBJECTS>
+                
+<OBJECTS> ::= <OBJECT> <OBJECTS>
+            | '}' 
+                            
+<OBJECT> ::= IDE <DEC_VAR> <MULTIPLE_OBJECTS> 
+            
+<MULTIPLE_OBJECTS> ::= ',' <DEC_VAR> <MULTIPLE_OBJECTS> 
+                    | ';'
+                    
+! -----------------------------------------------------
+! Bloco de classes - Atualizado em 18/09/2023 às 17:19
+<CLASS_BLOCK>::= 'class' <IDE_CLASS>
+
+
+<IDE_CLASS>::= IDE <EXTENDS>
+            | <MAIN>
+
+
+<EXTENDS>::= 'extends' IDE <START_CLASS_BLOCK>
+            | <START_CLASS_BLOCK>
+
+
+<START_CLASS_BLOCK>::= '{' <INIT_CLASS>
+
+
+<INIT_CLASS>::= <BODY_BLOCKS> <METHODS_BLOCK> <CONSTRUCTOR>
+
+
+<CONSTRUCTOR>::= 'constructor' '(' <DEC_PARAMETERS_CONSTRUCTOR> ')' '{' <VARIABLES_BLOCK> <OBJECTS_BLOCK> <COMMANDS> '}' <END_CLASS> 
+
+
+<END_CLASS> ::= '}' <CLASS_BLOCK>
+
+
+<MAIN>::= 'main' '{' <INIT_MAIN>
+
+
+<INIT_MAIN> ::= <BODY_BLOCKS> <MAIN_METHODS> '}'
+                
+<BODY_BLOCKS> ::= <VARIABLES_BLOCK> <OBJECTS_BLOCK> 
+                
+! -----------------------------------------------------
+! Bloco da main - Atualizado em 18/09/2023 às 17:16
+<MAIN_METHODS> ::= 'methods' '{' <MAIN_METHODS_BODY> '}'
+                
+<MAIN_METHODS_BODY> ::= <MAIN_TYPE> 'main()' '{' <METHOD_BODY> <METHODS>
+
+
+<MAIN_TYPE> ::= <TYPE>
+                | 'void'
+                
+!-------------------------------------------------
+! Bloco de if-else - Atualizado em 14/09/2023 às 08:30
+                    
+<IF> ::= 'if' '(' <CONDITION> ')' 'then' '{' <COMMANDS> '}' <IF_ELSE>
+
+
+<IF_ELSE> ::= 'else' '{' <COMMANDS> '}'
+            |
+                
+<CONDITION> ::= <LOGICAL_EXPRESSION>
+
+
+! -----------------------------------------------------
+! Bloco de constantes - Atualizado em 14/09/2023 às 20:49
+<CONSTS_BLOCK> ::=  'const' '{' <CONSTS>
+                
+<CONSTS> ::= <CONST> <CONSTS> 
+            |  '}'
+            
+<CONST> ::= <TYPE> <CONST_ATRIBUTION> <MULTIPLE_CONSTS>
+            
+<CONST_ATRIBUTION>::= IDE '=' <ATRIBUITION>
+                    
+<MULTIPLE_CONSTS> ::= ',' <CONST_ATRIBUTION>  <MULTIPLE_CONSTS> 
+                    | ';'
+                    
+<ATRIBUITION> ::= <NRO>
+                | Bool
+                | <CAC> 
+                
+!-------------------------------------------------------
+! Bloco atribuição de valor - Atualizaado em 19/09/2023 às 19:53
+                
+<OBJECT_ACCESS_OR_ASSIGMENT> ::= <DEC_OBJECT_ATRIBUTE_ACCESS> <OBJECT_ACCESS_OR_ASSIGMENT_END>
+            
+<OBJECT_ACCESS_OR_ASSIGMENT_END> ::= <OBJECT_METHOD_ACCESS_END> | '=' <VALUE> | ART_DOUBLE
+
+
+<VALUE> ::= <NRO> <SIMPLE_OR_DOUBLE_ARITHIMETIC_EXPRESSION_OPTIONAL> 
+            | <CAC>
+            | <VECTOR_ASSIGN_BLOCK>
+            | <INIT_EXPRESSION>       
+            | '!' <LOGICAL_EXPRESSION_BEGIN> <LOGICAL_EXPRESSION_END> 
+            | <ARITHIMETIC_OR_LOGICAL_EXPRESSION_WITH_PARENTHESES>
+            | Bool
+
+
+<SIMPLE_OR_DOUBLE_ARITHIMETIC_EXPRESSION_OPTIONAL> ::= <SIMPLE_OR_DOUBLE_ARITHIMETIC_EXPRESSION>
+                            |
+
+
+<INIT_EXPRESSION> ::= <DEC_OBJECT_ATRIBUTE_ACCESS> <ARITHIMETIC_OR_LOGICAL_EXPRESSION>
+
+
+<ARITHIMETIC_OR_LOGICAL_EXPRESSION> ::= <OPTIONAL_OBJECT_METHOD_ACCESS> <LOG_REL_OPTIONAL> <LOGICAL_EXPRESSION_END>
+            | <SIMPLE_OR_DOUBLE_ARITHIMETIC_EXPRESSION> 
+
+
+<ARITHIMETIC_OR_LOGICAL_EXPRESSION_WITH_PARENTHESES> ::= <PARENTHESES_BEGIN>
+
+
+<PARENTHESES_BEGIN> ::= '(' <EXPRESSIONS> <PARENTHESES_END>
+                
+<EXPRESSIONS> ::= <PARENTHESES_BEGIN>
+| <SIMPLE_EXPRESSION_WITHOUT_PARENTHESES>
+| <LOGICAL_EXPRESSION_WITHOUT_PARENTHESES>
+| <SIMPLE_OR_LOGICAL_IDE_BEGIN>
+
+
+<SIMPLE_OR_LOGICAL_IDE_BEGIN> ::= <DEC_OBJECT_ATRIBUTE_ACCESS> <SIMPLE_OR_LOGICAL_IDE_END>
+        
+<SIMPLE_OR_LOGICAL_IDE_END> ::= <END_EXPRESSION> | <OPTIONAL_OBJECT_METHOD_ACCESS> <LOG_REL_OPTIONAL> <LOGICAL_EXPRESSION_END>
+
+
+<PARENTHESES_END> ::= ')' <EXPRESSIONS_WITHOUT_PARENTHESES_END>
+
+
+<EXPRESSIONS_WITHOUT_PARENTHESES_END> ::= <END_EXPRESSION>
+| LOG <LOGICAL_EXPRESSION_BEGIN> <LOGICAL_EXPRESSION_END>
+| 
+
+
+<SIMPLE_EXPRESSION_WITHOUT_PARENTHESES> ::= <NRO> <END_EXPRESSION>
+
+
+<LOGICAL_EXPRESSION_WITHOUT_PARENTHESES> ::= Bool <LOGICAL_EXPRESSION_END>
+| '!' <LOGICAL_EXPRESSION_BEGIN> <LOGICAL_EXPRESSION_END>
+
+
+<VECTOR_ASSIGN_BLOCK> ::= '[' <ELEMENTS_ASSIGN> ']' 
+                        
+<ELEMENTS_ASSIGN> ::= <ELEMENT_ASSIGN> <MULTIPLE_ELEMENTS_ASSIGN>
+
+
+
+
+<N_DIMENSIONS_ASSIGN> ::= '[' <ELEMENTS_ASSIGN>  ']'
+                        |
+                
+<MULTIPLE_ELEMENTS_ASSIGN> ::= ',' <ELEMENT_ASSIGN> <MULTIPLE_ELEMENTS_ASSIGN> 
+                            |
+
+
+<ELEMENT_ASSIGN> ::= IDE
+                    | StringLiteral
+                    | <NRO>
+                    | <N_DIMENSIONS_ASSIGN>
+                    
+!-------------------------------------------------------
+! Bloco print e read - Atualizado em 14/09/2023 às 22:25
+<PRINT_BEGIN> ::= 'print' '(' <PRINT_END>
+
+
+<PRINT_END> ::= <PRINT_PARAMETER> ')' ';'
+
+
+<READ_BEGIN> ::= 'read' '(' <READ_END>
+
+
+<READ_END> ::= <DEC_OBJECT_ATRIBUTE_ACCESS>  ')' ';'
+
+
+<PRINT_PARAMETER> ::= <DEC_OBJECT_ATRIBUTE_ACCESS>
+                    | <CAC> 
+                    | <NRO>
+
+
+!-------------------------------------------------------
+! Bloco acesso a atributos e métodos de objetos - Atualizado em 18/09/2023 às 19:39
+
+
+<MULTIPLE_OBJECT_ATTRIBUTE_ACCESS> ::= <DEC_VAR> <END_OBJECT_ATTRIBUTE_ACCESS>
+                                    
+<END_OBJECT_ATTRIBUTE_ACCESS> ::= '.' <MULTIPLE_OBJECT_ATTRIBUTE_ACCESS>                                  
+                                |
+
+
+<OBJECT_METHOD_OR_OBJECT_ACCESS> ::= <OBJECT_METHOD_OR_OBJECT_ACCESS_OR_PART> 
+
+
+<OPTIONAL_OBJECT_METHOD_ACCESS> ::= <OBJECT_METHOD_ACCESS_END>
+                                    |
+
+
+<IDE_OR_CONSTRUCTOR> ::= 'constructor'
+                        | IDE
+
+
+<OBJECT_METHOD_ACCESS_END> ::= '->' <IDE_OR_CONSTRUCTOR> '(' <PARAMETERS> ')'
+                            
+! ---------------------------------------------------------------------------
+! Bloco operadores aritméticos - Atualizado em 16/09/2023 às 22:49
+                            
+<SIMPLE_OR_DOUBLE_ARITHIMETIC_EXPRESSION> ::= <END_EXPRESSION> 
+                    | ART_DOUBLE
+
+
+<END_EXPRESSION_OPTIONAL> ::=<END_EXPRESSION>
+                    |
+
+
+<SIMPLE_EXPRESSION> ::= <PART> <END_EXPRESSION>
+                    | <PARENTHESIS_EXPRESSION> 
+
+
+<PARENTHESIS_EXPRESSION> ::=  '(' <SIMPLE_EXPRESSION> ')' <END_EXPRESSION_OPTIONAL>
+    
+<END_EXPRESSION> ::= ART <PART_LOOP>
+
+
+<PART_LOOP> ::= <PART> <END_EXPRESSION_OPTIONAL>
+                | <PARENTHESIS_EXPRESSION>
+
+
+<PART> ::= <NRO> 
+        | <OBJECT_METHOD_OR_OBJECT_ACCESS_OR_PART>
+        
+!-----------------------------------------------------------------
+! Bloco operadores relacionais - Atualizado em 16/09/2023 às 23:09
+<RELATIONAL_EXPRESSION> ::= <RELATIONAL_EXPRESSION_VALUE> REL <RELATIONAL_EXPRESSION_VALUE>
+                    
+<RELATIONAL_EXPRESSION_VALUE> ::= <NRO> 
+            | <OBJECT_METHOD_OR_OBJECT_ACCESS>
+            | <CAC>
+            
+!-----------------------------------------------------------------
+! Bloco operadores relacionais - Atualizado em 16/09/2023 às 22:57
+<LOGICAL_EXPRESSION> ::= <LOGICAL_EXPRESSION_BEGIN> <LOGICAL_EXPRESSION_END>
+                    
+<LOGICAL_EXPRESSION_BEGIN> ::= '!' <LOGICAL_EXPRESSION_BEGIN> 
+                            | '(' <LOGICAL_EXPRESSION> ')'
+                            | <LOGICAL_EXPRESSION_VALUE>
+                            
+<LOGICAL_EXPRESSION_END> ::= LOG <LOGICAL_EXPRESSION_BEGIN> <LOGICAL_EXPRESSION_END>
+                        |  
+                        
+<LOG_REL_OPTIONAL> ::= REL <RELATIONAL_EXPRESSION_VALUE>
+                    | 
+
+
+<LOGICAL_EXPRESSION_VALUE> ::= Bool 
+                            | <OBJECT_METHOD_OR_OBJECT_ACCESS> <LOG_REL_OPTIONAL>
+                            
+!-----------------------------------------------------------------
+! Bloco for - Atualizado em 18/09/2023 às 10:40   
+<FOR_BLOCK> ::= <BEGIN_FOR> <FOR_INCREMENT> <END_FOR>
+                
+<ASSIGNMENT> ::= '=' <VALUE>
+                | ART_DOUBLE 
+
+
+<FOR_INCREMENT> ::= <DEC_OBJECT_ATRIBUTE_ACCESS> <ASSIGNMENT>
+        
+<BEGIN_FOR> ::= 'for' '(' <OBJECT_ACCESS_OR_ASSIGMENT> ';' <CONDITIONAL_EXPRESSION> ';' 
+                
+<END_FOR> ::= ')' '{' <COMMANDS> '}' 
+
+
+<CONDITIONAL_EXPRESSION> ::= <RELATIONAL_EXPRESSION>
+                            | '(' <RELATIONAL_EXPRESSION> ')'
+!----------------------------------------------
+! Bloco de métodos - Atualizado em 18/09/2023 às 11:55
+<METHODS_BLOCK> ::= 'methods' '{' <METHODS> '}'
+            
+<METHODS> ::= <METHOD> <METHODS>
+            |
+                
+<METHOD> ::= <TYPES> IDE '(' <DEC_PARAMETERS>
+            
+<TYPES> ::= 'void' | <TYPE_VARIABLES>
+                    
+<TYPE_VARIABLES> ::= <TYPE>
+                    | IDE
+                    
+! ------ Parameter Declaration ------------             
+<DEC_PARAMETERS> ::= <VARIABLE_PARAM> <MULT_DEC_PARAMETERS> 
+                    | <OBJECT_PARAM> <MULT_DEC_PARAMETERS> 
+                    | <END_DEC_PARAMETRS>
+
+
+<MULT_DEC_PARAMETERS> ::= ',' <TYPE_VARIABLES> IDE <MULT_DEC_PARAMETERS>
+                        | <END_DEC_PARAMETRS>
+                        
+<END_DEC_PARAMETRS> ::= ')' '{' <METHOD_BODY>
+
+
+! ------ Method Body ------------
+<METHOD_BODY> ::= <VARIABLES_BLOCK> <OBJECTS_BLOCK> <COMMANDS_METHOD_BODY> 
+        
+! ------ Commands ------------
+<COMMANDS_METHOD_BODY> ::= <COMMANDS> 'return' <RETURN> ';' '}'
+                            
+<COMMANDS> ::= <COMMAND> <COMMANDS>
+            |
+                
+<COMMAND> ::= <PRINT_BEGIN> 
+            | <READ_BEGIN>
+            | <OBJECT_ACCESS_OR_ASSIGMENT> ';'
+            | <IF> 
+            | <FOR_BLOCK>
+            
+<RETURN> ::= <VALUE>
+            |
+!-----------------------------------------------------
+! The grammar starts below
+<PROGRAM> ::= <CONSTS_BLOCK> <VARIABLES_BLOCK> <CLASS_BLOCK>
