@@ -795,7 +795,8 @@ class AnaliseSintatica_Semantica():
                 #   SEMÂNTICO: O objeto deve estar declarado para ser acessado.
                 if not ((self.table.get_lexema(self.current_token_text(), self.table.get_scope())) or (self.table.get_lexema(self.current_token_text(), self.table.get_current_method()))):
                     pass
-                elif self.current_token_text() == 'this': pass
+                elif self.current_token_text() == 'this': 
+                    pass
                 else:
                     self.semantic_errors_string += f'Erro semântico na linha {self.current_token_line()}, {self.current_token_text()} não foi declarado no escopo.\n'
                 self.next_token()
@@ -1072,7 +1073,13 @@ class AnaliseSintatica_Semantica():
                 self.table.set_scope(self.current_token_text())
                 self.table.inserir(self.current_token(),type='IDE', categoria='classe', escopo=self.table.get_scope())
                 if self.table.inserir_classe(self.current_token_text(),self.current_token_line()): pass
-                else: self.semantic_errors_string += (f'Identificador {self.current_token_text()} duplicado na linha {self.current_token_line()}.\n')
+                else: 
+                    self.semantic_errors_string += (f'Identificador classe {self.current_token_text()} duplicado na linha {self.current_token_line()} será sobrescrito.\n')
+                    lexema = self.table.get_lexema(self.current_token_text(), self.table.get_scope())
+                    lexema["ide"]=self.current_token_text()
+                    lexema["type"]='IDE'
+                    lexema["categoria"]='classe'
+                    lexema["escopo"]=self.table.get_scope()
                 self.next_token()
                 self.extends()
             elif self.current_token_text() == 'main':

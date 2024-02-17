@@ -1,5 +1,5 @@
 # Analisador Semântico
-O analisador semântico relaciona os símbolos do código com seu significado.
+O analisador sintático-semântico relaciona os símbolos do código com seu significado.
 - Variáveis e constantes globais:
     - Reconhece a duplicidade de identificadores
 - Blocos de classe:
@@ -8,13 +8,10 @@ O analisador semântico relaciona os símbolos do código com seu significado.
     - Variáveis de classe (atributos): Reconhece a duplicidade na classe, ou seja, é possível ter variável local de classe e global com o mesmo nome. 
     - Objetos de classe: Só é possível instanciar objetos de classes declaradas anteriormente.
 
-# Analisador sintático
-Analisador sintático descendente preditivo recursivo.
-
 ## Como executar:
-python3 main_sintatico.py
+python3 main_sintatico_semantico.py
 
-#### O analisador sintático testa todos os arquivos contendo código-fonte de entrada na pasta _files_
+#### O analisador sintático-semântico testa todos os arquivos contendo código-fonte de entrada na pasta _files_
 #### O resultado da análise sintática do projeto estará no arquivo _project_analysis_output_ na raiz do projeto.
 
 

@@ -1,7 +1,12 @@
-Duplicidade de simbolos age na linha 17.
-Duplicidade de simbolos age na linha 22.
-Duplicidade de simbolos age na linha 29.
-Duplicidade de simbolos age na linha 33.
-Duplicidade de simbolos age na linha 35.
-Duplicidade de simbolos name na linha 42.
-Duplicidade de simbolos age na linha 43.
+Erro semantico na linha 6, Person não e uma classe declarada.
+Duplicidade de simbolos age na linha 21.
+Duplicidade de simbolos school na linha 30.
+Duplicidade de simbolos area na linha 31.
+Duplicidade de simbolos age na linha 45.
+Duplicidade de simbolos age na linha 50.
+Duplicidade de simbolos age na linha 57.
+Duplicidade de simbolos age na linha 61.
+Duplicidade de simbolos age na linha 63.
+Duplicidade de simbolos name na linha 70.
+Duplicidade de simbolos age na linha 71.
+Identificador classe Teacher duplicado na linha 74 será sobrescrito.

@@ -3,6 +3,34 @@ const {
 }
 variables {
 }
+class Teacher extends Person {  // Erro de classe não declarada
+    variables{
+        string school;
+        string area;
+        int age;
+    }
+    objects{
+    }
+    methods{
+        int getAge() {
+            variables{
+                int my_age;
+            }
+            objects{}
+
+            my_age = this.age;
+
+            return my_age;
+        }
+    }
+    constructor (string school, string area) {
+        variables{}
+        objects{}
+        
+        this.school = school;
+        this.area = area;
+    }
+}
 class Person {
     variables{
         string name;
@@ -19,18 +47,18 @@ class Person {
             }
             objects {}
 
-            this.age = age; // Erro de tipos diferentes.
+            this.age = age; 
 
             return;
         }
 
-        int changeAge1() { // Erro de método duplicado
+        int changeAge1() { 
             variables {
                 int age; // Erro de identificadores duplicados.
             }
             objects {}
 
-            this.age = age; // Ero de tipos diferentes.
+            this.age = age;
 
             return this.age;
         }
@@ -41,6 +69,34 @@ class Person {
         
         this.name = name;
         this.age = age;
+    }
+}
+class Teacher {  // Sobrescrita de classe duplicada
+    variables{
+        string school;
+        string area;
+        int age;
+    }
+    objects{
+    }
+    methods{
+        int getAge() {
+            variables{
+                int my_age;
+            }
+            objects{}
+
+            my_age = this.age;
+
+            return my_age;
+        }
+    }
+    constructor (string school, string area) {
+        variables{}
+        objects{}
+        
+        this.school = school;
+        this.area = area;
     }
 }
 class main{
